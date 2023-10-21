@@ -1,0 +1,9 @@
+/src
+/node_modules
+/misc
+/.git
+/.github
+
+tsconfig.json
+.DS_Store
+eng.*
