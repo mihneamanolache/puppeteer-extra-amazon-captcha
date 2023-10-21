@@ -1,6 +1,6 @@
 {
     "name": "@mihnea.dev/puppeteer-extra-amazon-captcha",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A puppeteer-extra plugin to solve Amazon captchas using Tessaract.JS.",
     "main": "dist/index.js",
     "scripts": {
