@@ -28,8 +28,11 @@ export class PuppeteerExtraPluginAmazonCaptcha extends PuppeteerExtraPlugin {
 
     protected async _solveAmazonCaptcha(page: Page, url: string): Promise<void> {
         const worker = await createWorker("eng");
-        const captcha = await worker.recognize(url);
-        await page.type(this.opts.inputSelector, captcha.data.text.replace(/[^a-zA-Z0-9]/g, '').toUpperCase());
+        await worker.setParameters({
+            tessedit_char_whitelist: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        });
+        const { data: { text } } = await worker.recognize(url);
+        await page.type(this.opts.inputSelector, text.toUpperCase().replace(" ", ""));
         await page.keyboard.press('Enter');
         await worker.terminate();
     }
