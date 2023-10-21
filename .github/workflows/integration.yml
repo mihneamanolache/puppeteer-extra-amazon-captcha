@@ -22,8 +22,12 @@ jobs:
         run: npm ci
 
       - name: Version Bump
-        uses: ramonpaolo/bump-version@v2.3.1
-        with: 
-          tag: ${{ github.ref_name }}
-          commit: true
-          branch_to_push: 'main'
+        run: | 
+          npm run version:bump
+          git config --local user.email "mihnea.dev@gmail.com"
+          git config --local user.name "Mihnea Manolache"
+          git fetch
+          git checkout origin/$GITHUB_HEAD_REF
+          git add .
+          git commit -m "CI: Version bump"
+          git push origin HEAD:$GITHUB_HEAD_REF
