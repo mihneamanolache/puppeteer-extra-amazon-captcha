@@ -1,7 +1,9 @@
 # Puppeteer Extra Amazon Captcha Plugin 
 A simple [`puppeteer-extra`](https://github.com/berstend/puppeteer-extra/tree/master) plugin, made possible with [Tessaract.js](https://github.com/naptha/tesseract.js). 
 
-*Note: This plugin is still under development.*
+![preview](https://github.com/mihneamanolache/puppeteer-extra-amazon-captcha/assets/43548656/46c1b13f-f319-471b-9887-7cf3aec0b51e)
+
+*Note: This plugin is still under development and has not been tested in production.*
 
 ## Installation
 
@@ -10,30 +12,24 @@ npm i @mihnea.dev/puppeteer-extra-amazon-captcha
 ```
 
 ## Usage
-```typescript
+```js
 import AmazonCaptchaPlugin from "@mihnea.dev/puppeteer-extra-amazon-captcha";
 import puppeteer from 'puppeteer-extra';
-import { Browser, Page } from "puppeteer";
-
-let page:       Page    | undefined;
-let browser:    Browser | undefined
 try {
-    const amazonCaptchaPlugin = AmazonCaptchaPlugin();
+    const amazonCaptchaPlugin = AmazonCaptchaPlugin.default();
     puppeteer.use(amazonCaptchaPlugin);
-    browser = await puppeteer.launch({
-        headless: "new",
+    const browser = await puppeteer.launch({
+        headless: false,
         ignoreHTTPSErrors: true,
     });
-    page = await browser.newPage();
+    const page = await browser.newPage();
     await page.goto("https://www.amazon.com/errors/validateCaptcha");
     /** Important: Delay code execution until URL no longer includes "error" */
     await page.waitForFunction(() => !window.location.href.includes("error"));
-    url = page.url();
+    await page.close();
+    await browser.close();
 } catch (e) {
-    console.log("Error launching puppeteer: " + (<Error>e).message)
-} finally {
-    await page?.close();
-    await browser?.close();
+    console.log("Error launching puppeteer: " + e.message)
 }
 ```
 
