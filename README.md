@@ -1,3 +1,5 @@
+[![ProxyShare.io - 4G Mobile Proxies](https://github.com/mihneamanolache/puppeteer-extra-amazon-captcha/assets/43548656/c3efa5c2-848c-4c21-a184-c0190e6d6f35)](https://www.proxyshare.io/)
+
 # Puppeteer Extra Amazon Captcha Plugin 
 A simple [`puppeteer-extra`](https://github.com/berstend/puppeteer-extra/tree/master) plugin, made possible with [Tessaract.js](https://github.com/naptha/tesseract.js). 
 
